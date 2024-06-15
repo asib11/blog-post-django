@@ -1,19 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog-Home</title>
-</head>
-<body>
+{%extends 'blog/base.html'%}
+
+{%block content%}
     <h1>Blog Home!!</h1>
     {%for post in posts%}
-    <h2>{{post.name}}</h2>
-    <p>is a {{post.occupation}}, reads in {{post.subject}}</p>
-    <p style="font-weight: bold;" >Here are more information: </p>
-    <p>id: {{post.id}}</p>
-    <p>intake: {{post.inatke}}</p>
-    <p>section: {{post.section}}</p>
+        <h2>{{post.name}}</h2>
+        <p>is a {{post.occupation}}, reads in {{post.subject}}</p>
+        <p style="font-weight: bold;">Here are more information: </p>
+        <p>id: {{post.id}}</p>
+        <p>intake: {{post.inatke}}</p>
+        <p>section: {{post.section}}</p>
     {%endfor%}
-</body>
-</html>
+{%endblock content%}
