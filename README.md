@@ -10,4 +10,5 @@ to make super user, first do
     python3 manage.py migrate
 
 create super user
+
     python3 manage.py createsuperuser
