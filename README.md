@@ -12,3 +12,9 @@ to make super user, first do
 create super user
 
     python3 manage.py createsuperuser
+
+## database and migration
+
+    python3 manage.py makemigrate
+    python3 manage.py sqlmigrate <app name> <migrate initial file number>
+    python3 manage.py migrate
