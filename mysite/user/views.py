@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect # type: ignore
-from django.contrib.auth.forms import UserCreationForm # type: ignore
+# from django.contrib.auth.forms import UserCreationForm # type: ignore
 from django.contrib import messages # type: ignore
 from .froms import UserRegistrationFrom
+
+from django.contrib.auth import logout
+from django.views import View
 
 # Create your views here.
 def register(request):
@@ -10,8 +13,15 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}!!!')
-            return redirect('blog-home')
+            messages.success(request, f'Your account has been created for {username}. Now you can log in')
+            return redirect('login')
     else:
         form = UserRegistrationFrom()
     return render(request, 'user/register.html', {'form':form})
+
+class CustomLogoutView(View):
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        messages.success(request, f'Logout Successfully')
+        # return redirect('login')
+        return render(request, 'user/logout.html')

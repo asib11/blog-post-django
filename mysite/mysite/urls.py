@@ -23,6 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', user_view.register, name='register'),
     path('login/', auth_view.LoginView.as_view(template_name='user/login.html'), name='login'),
-    path('logout/', auth_view.LogoutView.as_view(), name='logout'),
+    path('logout/', user_view.CustomLogoutView.as_view(), name='logout'),
     path('', include('blog.urls')),
 ]
