@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect # type: ignore
-# from django.contrib.auth.forms import UserCreationForm # type: ignore
+from django.contrib.auth.decorators import  login_required # type: ignore
 from django.contrib import messages # type: ignore
 from .froms import UserRegistrationFrom
 
@@ -25,3 +25,7 @@ class CustomLogoutView(View):
         messages.success(request, f'Logout Successfully')
         # return redirect('login')
         return render(request, 'user/logout.html')
+
+@login_required
+def profile(request):
+    return render(request, 'user/profile.html')
