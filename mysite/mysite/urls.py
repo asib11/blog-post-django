@@ -18,6 +18,8 @@ from django.contrib import admin # type: ignore
 from django.contrib.auth import views as auth_view # type: ignore
 from django.urls import path, include # type: ignore
 from user import views as user_view
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,3 +29,6 @@ urlpatterns = [
     path('logout/', user_view.CustomLogoutView.as_view(), name='logout'),
     path('', include('blog.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
