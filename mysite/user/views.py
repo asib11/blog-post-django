@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect # type: ignore
 from django.contrib.auth.decorators import  login_required # type: ignore
 from django.contrib import messages # type: ignore
-from .froms import UserRegistrationFrom
+from .froms import UserRegistrationFrom, UserUpdateFrom, ProfileUpdateFrom
 
 from django.contrib.auth import logout
 from django.views import View
@@ -28,4 +28,8 @@ class CustomLogoutView(View):
 
 @login_required
 def profile(request):
-    return render(request, 'user/profile.html')
+    u_form = UserUpdateFrom(instance=request.user)
+    p_form = ProfileUpdateFrom(instance=request.user.profile)
+
+    context = {'u_form': u_form, 'p_form': p_form}
+    return render(request, 'user/profile.html', context)
