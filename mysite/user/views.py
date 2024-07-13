@@ -28,8 +28,18 @@ class CustomLogoutView(View):
 
 @login_required
 def profile(request):
-    u_form = UserUpdateFrom(instance=request.user)
-    p_form = ProfileUpdateFrom(instance=request.user.profile)
+    if request.method == 'POST':
+        u_form = UserUpdateFrom(request.POST,instance=request.user)
+        p_form = ProfileUpdateFrom(request.POST, request.FILES,instance=request.user.profile)
+
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Profile update Successfully')
+            return redirect('profile')
+    else:
+        u_form = UserUpdateFrom(instance=request.user)
+        p_form = ProfileUpdateFrom(instance=request.user.profile)
 
     context = {'u_form': u_form, 'p_form': p_form}
     return render(request, 'user/profile.html', context)
